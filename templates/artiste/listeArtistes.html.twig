@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des artistes{% endblock %}
+
+{% block body %}
+<h1 class="pt-2 text-center">Liste des artistes</h1>
+<hr>
+<div class="row pt-2">
+{% for lesArstiste in lesArtistes %}
+    {% set nbAlbums = lesArstiste.albums|length %}
+<div class="col-sm-12.col-md-12.col-lg-4.col-xl-3">
+        <div class="card mb-3">
+        <h3 class="card-header"> <a href=" {{path('ficheArtiste', {'id': leArtiste.id})}} "></a>{{leArstiste.nom}} </h3>
+        <div class="card-body">
+            <h5 class="card-title">
+                <a href="" class="badge badge-success"> {{nbAlbums}} {% if nbAlbums> 1 %} albums {% else %}album{% endif %}</a>
+            </h5>
+            </div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+            <rect width="100%" height="100%" fill="#868e96"></rect>
+            <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
+        </svg>
+        <div class="card-body">
+            <p class="card-text"> {{lesArstiste.description|slice(0,200)|raw}}...</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"> {% if leArstiste.type == 0 %} Artiste solo {% else %} Groupe{% endif %}</li>
+            <li class="list-group-item"> <a href="{{ leArtiste.site}}">son site web</a></li>
+           
+        </ul>
+        
+        
+    </div>
+</div>
+{% endfor %}
+
+</div>
+{% endblock %}

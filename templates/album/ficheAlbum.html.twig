@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche album{% endblock %}
+
+{% block body %}
+<h1 class="pt-2 text-center">Fiche de l'album</h1>
+<hr>
+        <div class="card mb-3">
+            <h3 class="card-header"> {{Album.nom}} </h3>
+            <div class="row">
+              <div class="col-3 d-flex align-items-center mx-auto"></div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+            <rect width="100%" height="100%" fill="#868e96"></rect>
+            <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>    
+        </div>
+        <div class="col">
+        <div class="card-body">
+            <h5 class="card-title">
+                <a href=" {{path('ficheArtiste',{'id': leAlbum.artiste.id})}}" class="badge badge-success"> {{leAlbum.artiste.nom}}</a>
+            </h5>
+            </div>
+        </svg>
+        <p class="card-text"> {{leAlbum.date}}...</p>
+       <ul class="list-group list-group-flush">
+            <li class="list-group-item"> 
+                {% for leStyle in leAlbum.styles %}
+                    <span class="badge" style="bacground-color: {{leStyle.couleur}};"> 
+                          {{leStyle.nom}} 
+                    </span>
+                {% endfor %}
+            </li>
+          <li class="list-group-item">
+                {{nb}} {% if nb>1 %} morceaux {% else %} morceau {% endif %}
+            </li>
+        </ul>
+    </div>
+</div>
+<table class="table table-hover mx-auto">
+  <thead>
+    <tr>
+      <th scope="col-3">Piste</th>
+      <th scope="col-4">Titre</th>
+      <th scope="col-1">Durée</th>
+      <th scope="col-3">Note</th>
+      </tr>
+  </thead>
+  <tbody>
+  {% for leMorceau in leAlbum.morceaux %}
+          <tr>
+                <td scope="row">
+                  {{leMorceau.piste}}
+                </td>
+                <td>{{leMorceau.titre}}</td>
+                <td>{{leMorceau.durée}}</td>
+          </tr>
+  {% endfor %}  
+  </tbody>
+</table>
+
+{% endblock %}
