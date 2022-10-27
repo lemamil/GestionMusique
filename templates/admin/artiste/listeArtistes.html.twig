@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des artistes{% endblock %}
+
+{% block body %}
+<h1 class="pt-2 text-center">Gestion des artistes</h1>
+<a href=" {{path("admin_artiste_ajout")}}" class="btn btn-success">Ajouter un artiste</a>
+<hr>
+ <table class="table table-hover">
+ <thead>
+    <tr>
+      <th scope="col-1"></th>
+      <th scope="col-2">Nom</th>
+      <th scope="col-3">Detail</th>
+      <th scope="col-2">Actions</th>
+    </tr>
+  </thead>
+<tbody>
+    {% for lesArstiste in lesArtistes %}
+        {% set nbAlbums = lesArstiste.albums|length %}
+        <tr> 
+        <td class="col-1"></td>
+        <td class="col-2">{{leArstiste.nom}}</td>
+        <td class="col-7">
+        <p class="d-flex flex-row">
+            <span class="align-self-center badge badge-success"> {{nbAlbums}} {% if nbAlbums> 1 %} albums {% else %}album{% endif %} </span>
+            <span class="align-self-center mx-3">{% if leArstiste.type == 0 %} Artiste solo {% else %} Groupe{% endif %}</span>
+            <span class="align-self-center ml-auto">{{ leArtiste.site}}</span>
+        </p>
+        <p>
+        {{leArstiste.description|slice(0,100)|raw}}...
+        </p>
+        </td>
+        <td class="col-2">
+        <a href="{{path('admin_artiste_modif', ('id': leArtiste.id))}} " class="btn btn-primary"><i class="fas fa-pen"></i></a>
+        <a class="btn btn-danger" 
+        data-toggle="modal"
+        data-target="modalSimples"
+        data-titre="Suppression d'un artiste"
+        data-message="Etes vous sur de vouloir supprimer l'ariste : {{ leArtiste.nom}}"
+        data-libelleBouton = "Supprimer l'artiste"
+        data-lien= "{{ path ('admin_artiste_suppression', {'id' : leArtiste.id})}}"
+        ><i class="far fa-trash-alt"></i></a>
+        </td>
+        </tr>
+    {% endfor %}   
+   </tbody>
+</table>
+<div class="navigation mx-auto">
+        {{ knp_pagination_render(lesArtistes) }}
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    {% include "include/_modale.html.twig" %}
+{% endblock %}

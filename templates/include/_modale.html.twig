@@ -1,0 +1,35 @@
+<div id="modalSimple" class="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+        <a id ="btn-action" href="" class="btn btn-primary"></a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$("a[data-lien]").click(function(){
+    // on récupère tous les éléments de la balise a
+    let lien=$(this).attr("data-lien");
+    let titre=$(this).attr("data-titre");
+    let message=$(this).attr("data-message");
+    let libelleBouton=$(this).attr("data-libelleBouton");
+    // on affecte les éléments à la modale
+    $("#btn-action".attr("href",lien));
+    $(".modal-title").text(titre);
+    $(".modal-body").text(message);
+    $(".modal-action").text(libelleBouton);
+    
+});
+</script>
